@@ -1,5 +1,6 @@
 SeleniumJT Core
 ===============
+<b>This is the CORE of seleniumJT and you should not need to do anything with this. To use SeleniumJT visit <a href="https://github.com/davehampton/seleniumjt">https://github.com/davehampton/seleniumjt</a></b>
 The Core project comes in 3 parts. The core code, a test server and unit tests. If you are to do any work on the core then you need to download all 3 projects as you will need to run the unit tests against the test server to ensure you haven’t broken anything. 
 
 <h2>seleniumjt-core</h2>

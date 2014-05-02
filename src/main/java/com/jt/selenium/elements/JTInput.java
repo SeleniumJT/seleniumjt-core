@@ -26,16 +26,19 @@ public class JTInput
 
 	public void verifySelectedLabelContains(String locator, String value)
 	{
+		jtCore.waitForElementPresent(locator);
 		Assert.assertTrue(getSelectedLabel(locator).contains(value), "Selected value of \"" + locator + "\" is not " + value);
 	}
 
 	public void verifyChecked(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		Assert.assertTrue(jtCore.getElement(locator).isSelected());
 	}
 
 	public void verifyNotChecked(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		Assert.assertFalse(jtCore.getElement(locator).isSelected());
 	}
 
@@ -82,6 +85,7 @@ public class JTInput
 
 	public String getInputValue(String locator)
 	{
+		jtCore.waitForElementPresent(locator);
 		return jtCore.getAttribute(locator, "value");
 	}
 

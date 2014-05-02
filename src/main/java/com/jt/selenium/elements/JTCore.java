@@ -193,14 +193,12 @@ public class JTCore {
 
 	@LogExecTime
 	public void waitForElementPresentAndVisible(String locator) {
-		if (!isVisible(locator)) {
-			// an 'Exception' to the rule - if not visible then wait...
-			waitForElementPresent(locator);
-			waitForElementVisible(locator);
-		}
+		waitForElementPresent(locator);
+		waitForElementVisible(locator);
 	}
 
 	public void verifyOccurrencesInElement(String locator, String regex, int occurs) {
+		waitForElementPresent(locator);
 		int actual = StringUtils.countMatches(getText(locator), regex);
 		Assert.assertEquals(actual, occurs,
 				String.format("Expected %s occurrences of %s in %s but there were %s", occurs, regex, locator, actual));
@@ -229,6 +227,7 @@ public class JTCore {
 
 	@LogExecTime
 	public boolean isVisible(String locator) {
+		waitForElementPresent(locator);
 		return getElement(locator).isDisplayed();
 	}
 
@@ -243,6 +242,7 @@ public class JTCore {
 	}
 
 	public void verifyElementText(String locator, String value, String message) {
+		waitForElementPresent(locator);
 		getElement(locator).getText();
 		String actualValue = getText(locator);
 		int tries = 0;
@@ -277,6 +277,7 @@ public class JTCore {
 	}
 
 	public void verifyElementNotContains(String locator, String value) {
+		waitForElementPresent(locator);
 		String actualValue = fastCheckOrWait(locator);
 		int tries = 0;
 		while (StringUtils.contains(actualValue, value) && tries++ < getRetryAttempts()) {
@@ -294,6 +295,7 @@ public class JTCore {
 	}
 
 	public void verifyElementContains(String locator, String value) {
+		waitForElementPresent(locator);
 		String actualValue = fastCheckOrWait(locator);
 		int tries = 0;
 		while (!StringUtils.contains(actualValue, value) && tries++ < getRetryAttempts()) {
@@ -354,14 +356,17 @@ public class JTCore {
 	}
 
 	public String getText(String locator) {
+		waitForElementPresent(locator);
 		return getElement(locator).getText();
 	}
 
 	public String getAttribute(String locator, String attribute) {
+		waitForElementPresent(locator);
 		return getElement(locator).getAttribute(attribute);
 	}
 
 	public void verifyAttribute(String locator, String attribute, String value) {
+		waitForElementPresent(locator);
 		String attribute2 = getAttribute(locator, attribute);
 		Assert.assertEquals(value, attribute2);
 	}
